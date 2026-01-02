@@ -9,25 +9,34 @@ const attempts = document.getElementById("attempts");
 let computerGuess;
 let maxRange = 0;
 let count = 0;
+let gameStarted = false;
 
 //  set difficulty
 difficulty.addEventListener("change", () => {
   if (difficulty.value === "easy") {
     maxRange = 10;
     count = 5;
-    attempts.innerHTML = `Total attempts: ${count}`;
+    // attempts.innerHTML = `Total attempts: ${count}`;
   } else if (difficulty.value === "medium") {
     maxRange = 50;
     count = 7;
-    attempts.innerHTML = `Total attempts: ${count}`;
+    // attempts.innerHTML = `Total attempts: ${count}`;
   } else {
     maxRange = 100;
     count = 10;
-    attempts.innerHTML = `Total attempts: ${count}`;
+    // attempts.innerHTML = `Total attempts: ${count}`;
   }
 
+  gameStarted = false; // important
+  attempts.innerText = `Total attempts: ${count}`;
+
   computerGuess = Math.floor(Math.random() * maxRange) + 1;
+  console.log(computerGuess);
   message.textContent = `Guess a number between 1 and ${maxRange}`;
+
+  resetBtn.hidden = true;
+  userGuess.disabled = false;
+  guessBtn.disabled = false;
 });
 
 // show message effect
@@ -55,33 +64,42 @@ function checkGuess() {
     return;
   }
 
+  // 👇 FIRST GUESS ONLY
+  if (!gameStarted) {
+    gameStarted = true;
+  }
+
   count--;
   attempts.innerText = `Attempts left: ${count}`;
 
-  if (count <= 0) {
-    message.innerText = "";
-    setMessage("You loss the game", "error");
-    userGuess.disabled = true;
-    guessBtn.disabled = true;
-    resetBtn.hidden = false;
-    return;
-  }
-
+  // Win First
   if (guess === computerGuess) {
     // message.classList.add("success");
     // userGuess.classList.add("success");
     setMessage("🎉 Correct! You guessed it right.", "success");
     userGuess.disabled = true;
     guessBtn.disabled = true;
-
     resetBtn.hidden = false;
-  } else if (guess > computerGuess) {
+    return;
+  }
+
+  // Loss
+  if (count <= 0) {
+    message.innerText = "";
+    setMessage(`You lost! Number was ${computerGuess}`, "error");
+    userGuess.disabled = true;
+    guessBtn.disabled = true;
+    resetBtn.hidden = false;
+    return;
+  }
+
+  // Hints
+  if (guess > computerGuess) {
     setMessage("📉 Too High!", "error");
-    userGuess.value = "";
   } else {
     setMessage("📈 Too Low!", "info");
-    userGuess.value = "";
   }
+  userGuess.value = "";
 }
 
 //  events
@@ -97,15 +115,9 @@ userGuess.addEventListener("keyup", (e) => {
 function resetGame() {
   userGuess.disabled = false;
   guessBtn.disabled = false;
-
   userGuess.value = "";
-  message.textContent = "";
 
-  resetBtn.hidden = true;
-
-  computerGuess = Math.floor(Math.random() * maxRange) + 1;
-
-  setMessage(`Guess a number between 1 and ${maxRange}`, "info");
+  gameStarted = false;
 
   if (difficulty.value === "easy") {
     count = 5;
@@ -114,8 +126,13 @@ function resetGame() {
   } else {
     count = 10;
   }
-  attempts.innerText = "";
+
   attempts.innerHTML = `Total attempts: ${count}`;
+
+  computerGuess = Math.floor(Math.random() * maxRange) + 1;
+  resetBtn.hidden = true;
+
+  setMessage(`Guess a number between 1 and ${maxRange}`, "info");
 }
 
 // reset Button
