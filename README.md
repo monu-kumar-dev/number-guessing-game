@@ -6,7 +6,7 @@ This project focuses on clean UI, smooth UX, and proper game logic handling such
 ---
 
 ## 🚀 Live Demo
-👉 *(https://tiny-kheer-c2b842.netlify.app/)*
+👉 *(https://number-guessing-game-monu.netlify.app/)*
 
 ---
 
