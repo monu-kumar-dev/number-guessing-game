@@ -4,18 +4,26 @@ const message = document.getElementById("message");
 const guessBtn = document.getElementById("guessBtn");
 const difficulty = document.getElementById("difficulty");
 const resetBtn = document.getElementById("resetBtn");
+const attempts = document.getElementById("attempts");
 
 let computerGuess;
 let maxRange = 0;
+let count = 0;
 
 //  set difficulty
 difficulty.addEventListener("change", () => {
   if (difficulty.value === "easy") {
     maxRange = 10;
+    count = 5;
+    attempts.innerHTML = `Total attempts: ${count}`;
   } else if (difficulty.value === "medium") {
     maxRange = 50;
+    count = 7;
+    attempts.innerHTML = `Total attempts: ${count}`;
   } else {
     maxRange = 100;
+    count = 10;
+    attempts.innerHTML = `Total attempts: ${count}`;
   }
 
   computerGuess = Math.floor(Math.random() * maxRange) + 1;
@@ -43,10 +51,19 @@ function checkGuess() {
   const guess = Number(userGuess.value);
 
   if (!guess || guess < 1 || guess > maxRange) {
-    message.textContent = setMessage(
-      `Guess a number between 1 and ${maxRange}`,
-      "info"
-    );
+    setMessage(`Guess a number between 1 and ${maxRange}`, "info");
+    return;
+  }
+
+  count--;
+  attempts.innerText = `Attempts left: ${count}`;
+
+  if (count <= 0) {
+    message.innerText = "";
+    setMessage("You loss the game", "error");
+    userGuess.disabled = true;
+    guessBtn.disabled = true;
+    resetBtn.hidden = false;
     return;
   }
 
@@ -60,8 +77,10 @@ function checkGuess() {
     resetBtn.hidden = false;
   } else if (guess > computerGuess) {
     setMessage("📉 Too High!", "error");
+    userGuess.value = "";
   } else {
     setMessage("📈 Too Low!", "info");
+    userGuess.value = "";
   }
 }
 
@@ -87,6 +106,16 @@ function resetGame() {
   computerGuess = Math.floor(Math.random() * maxRange) + 1;
 
   setMessage(`Guess a number between 1 and ${maxRange}`, "info");
+
+  if (difficulty.value === "easy") {
+    count = 5;
+  } else if (difficulty.value === "medium") {
+    count = 7;
+  } else {
+    count = 10;
+  }
+  attempts.innerText = "";
+  attempts.innerHTML = `Total attempts: ${count}`;
 }
 
 // reset Button
