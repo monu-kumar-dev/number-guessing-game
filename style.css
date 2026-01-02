@@ -1,4 +1,4 @@
-/* ===== RESET & BASE ===== */
+/*  RESET */
 * {
     margin: 0;
     padding: 0;
@@ -14,7 +14,7 @@ body {
     background: linear-gradient(135deg, #667eea, #764ba2);
 }
 
-/* ===== MAIN CONTAINER ===== */
+/* MAIN CONTAINER */
 .container {
     background: #ffffff;
     width: 360px;
@@ -24,14 +24,14 @@ body {
     text-align: center;
 }
 
-/* ===== HEADING ===== */
+/* HEADING */
 .heading {
     margin-bottom: 20px;
     font-size: 24px;
     color: #333;
 }
 
-/* ===== DIFFICULTY SELECT ===== */
+/* DIFFICULTY SELECT */
 .select-difficulty {
     margin-bottom: 20px;
     text-align: left;
@@ -56,7 +56,7 @@ body {
     border-color: #667eea;
 }
 
-/* ===== INPUT AREA ===== */
+/* INPUT AREA*/
 .input-area {
     display: flex;
     gap: 10px;
@@ -91,7 +91,7 @@ body {
     background: #5563d6;
 }
 
-/* ===== MESSAGE AREA ===== */
+/* MESSAGE AREA */
 #message {
     min-height: 22px;
     margin: 10px 0;
@@ -101,25 +101,59 @@ body {
 
 /* Message states (JS will toggle classes) */
 .success {
-    color: #2ecc71;
+  color: #2ecc71;
+  animation: pop 0.4s ease;
 }
+
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 .error {
-    color: #e74c3c;
+  color: #e74c3c;
+  animation: shake 0.4s;
 }
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
 
 .info {
-    color: #f39c12;
+  color: #f39c12;
+  animation: fadeIn 0.4s ease-in;
 }
 
-/* ===== ATTEMPTS ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+/* ATTEMPTS */
 #attempts {
     margin: 8px 0 16px;
     font-size: 14px;
     color: #444;
 }
 
-/* ===== RESET BUTTON ===== */
+/* RESET BUTTON */
 #resetBtn {
     width: 100%;
     padding: 10px;
