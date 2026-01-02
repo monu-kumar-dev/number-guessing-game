@@ -5,23 +5,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
+    <link rel="stylesheet" href="./style.css">
 </head>
 
 <body>
 
+    <div class="container">
+
+        <!-- GAME HEADING -->
+        <h2 class="heading">Number Guessing Game</h2>
+
+        <!-- DIFFICULTY SELECTION -->
+        <div class="select-difficulty">
+            <label for="difficulty">Choose difficulty:</label>
+            <select id="difficulty">
+                <option value="">-- Select Level --</option>
+                <option value="easy">Easy</option>
+                <option value="medium">Medium</option>
+                <option value="hard">Hard</option>
+            </select>
+        </div>
+
+        <!-- USER INPUT -->
+        <div class="input-area">
+            <input type="number" id="guessInput" placeholder="Enter your guess">
+            <button id="guessBtn">Guess</button>
+        </div>
+
+        <!-- MESSAGE AREA -->
+        <p id="message"></p>
+
+        <!-- ATTEMPTS LEFT -->
+        <p id="attempts">Attempts left: --</p>
+
+        <!-- RESET BUTTON -->
+        <button id="resetBtn" hidden>Restart Game</button>
+
+    </div>
+
+    <script src="./script.js"></script>
 </body>
-<div class="container">
-    <div class="heading">
-        <h2>Number Guessing Game</h2>
-    </div>
-    <div class="selct-difficulty">
-        <label for="difficulty">Choose difficulty: </label>
-        <select name="difficulty" id="difficulty">
-            <option value="Easy">Easy</option>
-            <option value="Mediun">Medium</option>
-            <option value="High">High</option>
-        </select>
-    </div>
-</div>
 
 </html>
