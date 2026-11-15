@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guess Game</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <main class="game-container">
+        <h1>Number Guessing</h1>
+        <p>Can you guess the secret number?</p>
+
+        <div class="number-range">
+            <p>I'm thinking of a number between</p>
+            <h2>1 – 100</h2>
+        </div>
+
+        <div class="guess-section">
+            <label for="guess-input">Enter your guess</label>
+
+            <input type="number" id="guess-input" placeholder="Enter a number..." min="1" max="100">
+
+            <button id="submit-btn" type="button">
+                SUBMIT GUESS
+            </button>
+        </div>
+
+        <div class="feedback-section">
+            <p id="feedback">Your feedback will appear here.</p>
+        </div>
+
+        <div class="game-stats">
+
+            <div class="game-stats-attempt">
+                <p>Attempts</p>
+                <h2 id="attempts">0</h2>
+            </div>
+
+            <div>
+                <p>Previous Guess</p>
+                <p id="previous-guess">--</p>
+            </div>
+
+        </div>
+
+        <button id="restart-btn" type="button">
+            ↻ PLAY AGAIN
+        </button>
+    </main>
+    <script src="./first.js"></script>
+</body>
+
+</html>
